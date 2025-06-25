@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Futuristic Design</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #0ff0fc;
+            --neon-pink: #ff2ced;
+            --neon-purple: #9600ff;
+            --dark-bg: #0a0a12;
+            --darker-bg: #050508;
+            --text-light: rgba(255,255,255,0.9);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+        
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, var(--neon-purple), transparent 30%),
+                radial-gradient(circle at 80% 70%, var(--neon-blue), transparent 30%),
+                var(--darker-bg);
+            z-index: -1;
+            transform: translateZ(-50px) scale(1.5);
+        }
+        
+        .floating-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s infinite linear;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+        
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(15, 240, 252, 0.3);
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--neon-blue);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            margin-bottom: 8rem;
+        }
+        
+        .hero-content {
+            flex: 1;
+            transform: translateZ(30px);
+        }
+        
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px rgba(15, 240, 252, 0.5);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(15, 240, 252, 0.8);
+        }
+        
+        .btn-secondary {
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(15, 240, 252, 0.1);
+            color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(15, 240, 252, 0.3);
+        }
+        
+        .hero-image {
+            flex: 1;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+        
+        .glow-card {
+            width: 100%;
+            height: 400px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 30px rgba(15, 240, 252, 0.1);
+            position: relative;
+            overflow: hidden;
+            transform: rotateY(15deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-image:hover .glow-card {
+            transform: rotateY(5deg) rotateX(0deg);
+        }
+        
+        .glow-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent, 
+                transparent, 
+                transparent, 
+                var(--neon-blue)
+            );
+            animation: rotate 4s linear infinite;
+        }
+        
+        .glow-card::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            border-radius: 18px;
+            background: rgba(10,10,18,0.8);
+        }
+        
+        .card-content {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 2rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 5rem 0;
+        }
+        
+        .feature-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.06);
+            box-shadow: 0 10px 30px rgba(15, 240, 252, 0.1);
+            border-color: rgba(15, 240, 252, 0.2);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .feature-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .feature-card p {
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+        
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-50px);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-image {
+                width: 100%;
+                margin-top: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="parallax-bg"></div>
+    <div class="floating-grid"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">NEO<span style="color: var(--neon-pink)">TECH</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section class="hero">
+            <div class="hero-content">
+                <h1>THE FUTURE IS NOW</h1>
+                <p>Experience cutting-edge technology with our revolutionary platform. Powered by AI and blockchain, we deliver solutions that transform businesses and redefine user experiences.</p>
+                <div class="btn-group">
+                    <a href="#" class="btn btn-primary">Get Started</a>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="glow-card">
+                    <div class="card-content">
+                        <i class="fas fa-robot feature-icon" style="font-size: 4rem;"></i>
+                        <h3 style="color: var(--neon-blue); margin-top: 1rem;">AI Powered</h3>
+                        <p style="text-align: center;">Next generation artificial intelligence for your business needs</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="features">
+            <div class="feature-card">
+                <i class="fas fa-bolt feature-icon"></i>
+                <h3>Lightning Fast</h3>
+                <p>Optimized for performance with our proprietary acceleration technology that delivers unmatched speed.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shield-alt feature-icon"></i>
+                <h3>Military Security</h3>
+                <p>Enterprise-grade security with end-to-end encryption and blockchain verification for all transactions.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-infinity feature-icon"></i>
+                <h3>Limitless Scale</h3>
+                <p>Cloud-native architecture that automatically scales to meet any demand without performance degradation.</p>
+            </div>
+        </section>
+    </div>
+    
+    <script>
+        // Simple parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            document.querySelector('.hero-image').style.transform = `
+                rotateY(${(x - 0.5) * 10}deg) 
+                rotateX(${(0.5 - y) * 10}deg)
+            `;
+            
+            document.querySelector('.parallax-bg').style.transform = `
+                translateZ(-50px) 
+                translateX(${(x - 0.5) * 20}px)
+                translateY(${(y - 0.5) * 20}px)
+                scale(1.5)
+            `;
+        });
+    </script>
+</body>
+  </html>
